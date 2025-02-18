@@ -29,13 +29,13 @@ share your completed code/repo with:
 
 ## Tech test - Tasks:
 
-  ### A. Setup
+  ### ~~A. Setup~~
   <ol>
     <li>create a github repo and push the project to `main`</li>
     <li>invite SirJamesBrown as a reviewer</li>
   </ol>
 
-  ### B. Project
+  ### ~~B. Project~~
   <ol>
     <li>resolve the 4+ 'High' impact vulnerabilities when running `npm i`</li>
     <li>create a new branch `project-{yymmdd}`</li>
@@ -45,7 +45,7 @@ share your completed code/repo with:
   </ol>
 
   #### <i>Please branch and commit the remaining tasks as you please, but all should be merged to main by submission</i>
-  ### C. Vue
+  ### ~~C. Vue~~
   <ol>
     <li>for each item in the `Poses` component, display all key / values given in 'properties' of the items found in `proto_demo.js` using your judgment on how to display them. Note: negative or null properties should hidden</li>
     <li>add jsdoc/docstring descriptions for functions `instrument_settings`, `chng_face`, `getCube` & `getHL` (rename functions and variables as you see fit with comments or proxies)</li>
@@ -53,7 +53,7 @@ share your completed code/repo with:
     <li>convert the 'pose' buttons to a dropdown menu using the vue composition api bindings to set the face of the cube</li>
   </ol>
 
-  ### D. Store
+  ### ~~D. Store~~
   <ol>
     <li>create a pinia store</li>
     <li>convert `instrument_settings`, `chng_face`, `getCube` & `getHL` functions to store methods and access getters and setters directly from the `Poses` component</li>
