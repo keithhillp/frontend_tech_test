@@ -37,7 +37,7 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
           poses: {{ item.settings.poses }}
         </td>
         <td>
-          <div v-for="res of instrument_settings(item.settings)">{{ res }}</div>
+          <div v-for="res of instrument_settings(item.settings.poses)">{{ res }}</div>
         </td>
         <td class="props">
           <p v-if="item.properties.sub">Sub: {{ item.properties.sub }}</p>
@@ -71,7 +71,7 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
         <td>
 
           <div style="display: flex; flex-direction: row;">
-            <div v-for="face in instrument_settings(item.settings)" class="scene2">
+            <div v-for="face in instrument_settings(item.settings.poses)" class="scene2">
               <div :class="`cube2 show-${face}`">
                 <div 
                 v-for="pose in faces" 
