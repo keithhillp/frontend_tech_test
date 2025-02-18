@@ -1,20 +1,11 @@
 <script setup>
 import { proto } from './proto_demo.mjs'
+import { usePoseStore } from '../stores/pose_store'
 
-const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
-  faces: {
-    type: Array,
-    default: ['face_up', 'face_down']
-  },
-  chng_face: Function,
-  getCube: Function,
-  getHL: Function,
-  instrument_settings: Function,
-})
+const store = usePoseStore()
 </script>
 
 <template>
-
   <table class="list">
     <th>face</th>
     <th>options</th>
@@ -37,7 +28,7 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
           poses: {{ item.settings.poses }}
         </td>
         <td>
-          <div v-for="res of instrument_settings(item.settings.poses)">{{ res }}</div>
+          <div v-for="res of store.instrument_settings(item.settings.poses)">{{ res }}</div>
         </td>
         <td class="props">
           <p v-if="item.properties.sub">Sub: {{ item.properties.sub }}</p>
@@ -58,10 +49,10 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
 
         <td>
           <div class="scene">
-            <div :class="`cube ${getCube(idx)}`">
+            <div :class="`cube ${store.cubes[idx]?.[1]}`">
               <div 
-              v-for="pose in faces" 
-              :class="`cube__face cube__face--${pose}${getHL(idx, pose) ? ' highlight' : ''}`">
+              v-for="pose in store.faces" 
+              :class="`cube__face cube__face--${pose}${store.getHL(idx, pose) ? ' highlight' : ''}`">
                 {{ pose.split('_').join(' ') }}
               </div>
             </div>
@@ -71,10 +62,10 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
         <td>
 
           <div style="display: flex; flex-direction: row;">
-            <div v-for="face in instrument_settings(item.settings.poses)" class="scene2">
+            <div v-for="face in store.instrument_settings(item.settings.poses)" class="scene2">
               <div :class="`cube2 show-${face}`">
                 <div 
-                v-for="pose in faces" 
+                v-for="pose in store.faces" 
                 :class="`cube2__face cube2__face--${pose}`">
                   {{ pose == face ? String(pose).split('_').join(' ') : null }}
                 </div>
@@ -84,7 +75,7 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
 
           <div style="display: flex; flex-direction: row;">
             <select name="faces">
-              <option v-for="face in instrument_settings(item.settings.poses)" :value="face" @click="chng_face(idx, face)">{{ face }}</option>
+              <option v-for="face in store.instrument_settings(item.settings.poses)" :selected="store.hl[idx]?.[1] === face" :value="face" @click="store.chng_face(idx, face)">{{ face }}</option>
             </select>
           </div>
 
