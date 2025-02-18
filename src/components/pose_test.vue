@@ -19,15 +19,16 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
     <th>face</th>
     <th>options</th>
     <th>result</th>
+    <th>properties</th>
 
     <template v-for="(item, idx) of proto">
       
       <tr class="title space">
-        <td colspan="3">{{ '|   ' }}</td>
+        <td colspan="4">{{ '|   ' }}</td>
       </tr>
       
       <tr class="title">
-        <td colspan="3">{{ item.scalpel_id }}</td>
+        <td colspan="4">{{ item.scalpel_id }}</td>
       </tr>
       
       <tr class="v_up">
@@ -37,6 +38,19 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
         </td>
         <td>
           <div v-for="res of instrument_settings(item.settings)">{{ res }}</div>
+        </td>
+        <td class="props">
+          <p v-if="item.properties.sub">Sub: {{ item.properties.sub }}</p>
+          <p v-if="item.properties.length">Length: {{ item.properties.length }}</p>
+          <p v-if="item.properties.characteristic">Characteristic: {{ item.properties.characteristic }}</p>
+          <span v-if="item.properties.speciality">
+            <p>Speciality:</p>
+            <ul>
+              <li v-for="(speciality, idx) of item.properties.speciality">{{ speciality }}</li>
+            </ul>
+          </span>
+          <p v-if="item.properties.finer">Finer: {{ item.properties.finer }}</p>
+          <p v-if="item.properties.broader">Broader: {{ item.properties.broader }}</p>
         </td>
       </tr>
       
@@ -103,7 +117,7 @@ button
     .code
       color: #bebebe
       font-size: small
-
+ 
 .space
   background-color: #242424
   color: #242424
@@ -136,5 +150,9 @@ td
 
 .active
   background-color: #565ed8
+
+.props
+  p
+      margin-top: 0
 
 </style>
