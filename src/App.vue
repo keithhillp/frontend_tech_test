@@ -28,9 +28,10 @@ onMounted(() => {
 
 </template>
 
-<style scoped lang="sass">
-.task
-  margin: 10px
-  font-size: 12px
-  font-weight: bold
+<style scoped lang="scss">
+.task {
+  margin: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
 </style>

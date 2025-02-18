@@ -7,21 +7,21 @@ const store = usePoseStore()
 
 <template>
   <table class="list">
-    <th>face</th>
-    <th>options</th>
-    <th>result</th>
-    <th>properties</th>
+    <th>Face</th>
+    <th>Options</th>
+    <th>Result</th>
+    <th>Properties</th>
 
     <template v-for="(item, idx) of proto">
-      
+
       <tr class="title space">
-        <td colspan="4">{{ '|   ' }}</td>
+        <td colspan="4">{{ '| ' }}</td>
       </tr>
-      
+
       <tr class="title">
         <td colspan="4">{{ item.scalpel_id }}</td>
       </tr>
-      
+
       <tr class="v_up">
         <td>{{ idx }}</td>
         <td class="code">
@@ -44,15 +44,14 @@ const store = usePoseStore()
           <p v-if="item.properties.broader">Broader: {{ item.properties.broader }}</p>
         </td>
       </tr>
-      
+
       <tr>
 
         <td>
           <div class="scene">
             <div :class="`cube ${store.cubes[idx]?.[1]}`">
-              <div 
-              v-for="pose in store.faces" 
-              :class="`cube__face cube__face--${pose}${store.getHL(idx, pose) ? ' highlight' : ''}`">
+              <div v-for="pose in store.faces"
+                :class="`cube__face cube__face--${pose}${store.getHL(idx, pose) ? ' highlight' : ''}`">
                 {{ pose.split('_').join(' ') }}
               </div>
             </div>
@@ -64,9 +63,7 @@ const store = usePoseStore()
           <div style="display: flex; flex-direction: row;">
             <div v-for="face in store.instrument_settings(item.settings.poses)" class="scene2">
               <div :class="`cube2 show-${face}`">
-                <div 
-                v-for="pose in store.faces" 
-                :class="`cube2__face cube2__face--${pose}`">
+                <div v-for="pose in store.faces" :class="`cube2__face cube2__face--${pose}`">
                   {{ pose == face ? String(pose).split('_').join(' ') : null }}
                 </div>
               </div>
@@ -74,74 +71,97 @@ const store = usePoseStore()
           </div>
 
           <div style="display: flex; flex-direction: row;">
-            <select name="faces">
-              <option v-for="face in store.instrument_settings(item.settings.poses)" :selected="store.hl[idx]?.[1] === face" :value="face" @click="store.chng_face(idx, face)">{{ face }}</option>
+            <select name="faces" @change="store.chng_face(idx, $event.target.value)">
+              <option v-for="face in store.instrument_settings(item.settings.poses)"
+                :selected="store.hl[idx]?.[1] === face" :value="face">
+                {{ face }}
+              </option>
             </select>
           </div>
 
         </td>
       </tr>
-    
+
     </template>
   </table>
 
 </template>
 
-<style scoped lang="sass">
+<style scoped lang="scss">
+body {
+  font-size: 12px;
+  background-color: #242424;
 
-body
-  font-size: 12px
-  background-color: #242424
+  table {
+    width: 100vw;
+  }
+}
 
-button
-  margin: 2px
+button {
+  margin: 2px;
+}
 
-.list
-  border-spacing: 0px
-  .title
-    border-spacing: 0
-    font-size: large
-  .v_up
-    vertical-align: top
-    .code
-      color: #bebebe
-      font-size: small
- 
-.space
-  background-color: #242424
-  color: #242424
+.list {
+  border-spacing: 0px;
 
-.sect
-  display: flex
-  flex-direction: column
-  max-width: 30vw
-  min-width: 29vw
-  margin: 20px
+  .title {
+    border-spacing: 0;
+    font-size: large;
 
-.sub
-  color: #edff79
+    .v_up {
+      vertical-align: top;
 
-table
-  padding: 0 10px
-  text-transform: lowercase
-  font-family: monospace
+      .code {
+        color: #bebebe;
+        font-size: small;
+      }
+    }
+  }
+}
 
-tr
-  background-color: #183666
+.space {
+  background-color: #242424;
+  color: #242424;
+}
 
-td
-  padding: 10px 0 0 10px
+.sect {
+  display: flex;
+  flex-direction: column;
+  max-width: 30vw;
+  min-width: 29vw;
+  margin: 20px;
+}
 
-.col
-  display: flex
-  flex-direction: column
-  margin-right: 20px
+.sub {
+  color: #edff79;
+}
 
-.active
-  background-color: #565ed8
+table {
+  padding: 0 10px;
+  font-family: monospace;
+}
 
-.props
-  p
-      margin-top: 0
+tr {
+  background-color: #183666;
+}
 
+td {
+  padding: 10px 0 0 10px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.active {
+  background-color: #565ed8;
+}
+
+.props {
+  p {
+    margin-top: 0;
+  }
+}
 </style>
