@@ -24,7 +24,7 @@ onMounted(() => {
     <!-- ADD YOUR POST INPUT AND GET OUTPUT IN THIS SPACE -->
   </div>
 
-  <Poses :faces :chng_face :getCube :getHL :instrument_settings />
+  <Poses />
 
 </template>
 
