@@ -7,10 +7,14 @@ const store = usePoseStore()
 
 <template>
   <table class="list">
-    <th>Face</th>
-    <th>Options</th>
-    <th>Result</th>
-    <th>Properties</th>
+    <thead>
+      <tr>
+        <th>Face</th>
+        <th>Options</th>
+        <th>Result</th>
+        <th>Properties</th>
+      </tr>
+  </thead>
 
     <template v-for="(item, idx) of proto">
 
