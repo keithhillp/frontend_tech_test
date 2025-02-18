@@ -83,11 +83,9 @@ const { faces, chng_face, getCube, getHL, instrument_settings } = defineProps({
           </div>
 
           <div style="display: flex; flex-direction: row;">
-            <button
-            v-for="face in faces"
-            @click="chng_face(idx, face)">
-              {{ face }}
-            </button>
+            <select name="faces">
+              <option v-for="face in instrument_settings(item.settings.poses)" :value="face" @click="chng_face(idx, face)">{{ face }}</option>
+            </select>
           </div>
 
         </td>
